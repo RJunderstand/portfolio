@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { font-family: 'Hanken Grotesk', system-ui, sans-serif; background: #FFFFFF; color: #161A20; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: #1F4E79; }
+  a:hover { color: #14324e; }
+  ::selection { background: rgba(31,78,121,0.2); }
+  input::placeholder { color: rgba(255,255,255,0.52); opacity: 1; }
+  input[type="search"]::-webkit-search-cancel-button { filter: invert(1) opacity(0.6); cursor: pointer; }
+  @keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  @media (max-width: 1080px) {
+    [data-split] { grid-template-columns: 1fr !important; row-gap: clamp(1.6rem,4vw,2.4rem) !important; }
+  }
+  [data-case-header] { cursor: pointer; }
+  [data-case-header] a { cursor: pointer; }
+  @media (max-width: 940px) {
+    [data-case-header] { flex-direction: column !important; align-items: flex-start !important; }
+    [data-case-header] > div { flex: 0 0 auto !important; width: 100% !important; }
+    [data-case-stat] { text-align: left !important; }
+    [data-case-stat] p { max-width: none !important; }
+  }
+</style>
+</helmet>
+<template id="__bundler_thumbnail" data-bg-color="#161A20">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#161A20"></rect>
+    <text x="600" y="430" text-anchor="middle" font-family="Georgia,serif" font-size="150" fill="#FFFFFF">All work</text>
+    <rect x="500" y="510" width="200" height="6" fill="#AECBEE"></rect>
+  </svg>
+</template>
+<div style="--accent: {{ accentColor }}; position:relative; background:#FFFFFF; color:#161A20; overflow-x:hidden;">
+
+  <nav aria-label="Primary" style="position:fixed; top:0; left:0; right:0; z-index:70; background:#FFFFFF; border-bottom:1px solid #C5CAD2;">
+    <div style="max-width:1240px; margin:0 auto; padding:0.85rem clamp(1.25rem,5vw,3rem); display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+      <a href="Portfolio (banded).dc.html" style="flex-shrink:0; font-family:'Newsreader',serif; font-size:clamp(1.05rem,4vw,1.24rem); font-weight:500; text-decoration:none; letter-spacing:-0.01em; color:#161A20;" style-hover="color:#1F4E79;">Ruojing&nbsp;Kou</a>
+      <a href="Portfolio (banded).dc.html#work" style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.76rem; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; color:#39414E; padding:11px 0;" style-hover="color:#1F4E79;">← Back to portfolio</a>
+    </div>
+  </nav>
+
+  <main style="position:relative; padding-top:58px;">
+
+    <section data-screen-label="All work header" style="background:#161A20; color:#FFFFFF; padding:clamp(3.4rem,8vw,6rem) 0;">
+      <div style="max-width:1240px; margin:0 auto; padding:0 clamp(1.5rem,5vw,3rem);">
+        <div style="display:flex; align-items:center; gap:20px;">
+          <h1 style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(1.7rem,3.4vw,2.5rem); line-height:1.06; letter-spacing:-0.015em; color:#FFFFFF; white-space:nowrap;">All work</h1>
+          <span style="flex:1; height:1px; background:rgba(255,255,255,0.3);"></span>
+        </div>
+        <div style="margin-top:clamp(1.4rem,3vw,2.2rem); max-width:660px;">
+          <div style="display:flex; align-items:center; gap:14px; border-bottom:2px solid rgba(255,255,255,0.45); padding-bottom:12px;">
+            <span aria-hidden="true" style="font-family:'IBM Plex Mono',monospace; font-size:1.25rem; line-height:1; color:#AECBEE;">⌕</span>
+            <input type="search" aria-label="Search all work" placeholder="Search the work: accessibility, automation, Notion…" onInput="{{ onSearch }}" style="flex:1 1 auto; min-width:0; background:transparent; border:none; outline:none; color:#FFFFFF; font-family:'Hanken Grotesk',sans-serif; font-size:clamp(1.05rem,2.6vw,1.5rem); font-weight:400; padding:0;">
+          </div>
+          <p data-search-count="" role="status" aria-live="polite" aria-atomic="true" style="margin-top:0; font-family:'IBM Plex Mono',monospace; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.66);"></p>
+        </div>
+        <div style="margin-top:clamp(1.8rem,4vw,2.6rem); display:flex; flex-wrap:wrap; gap:10px;">
+          <a href="#work-01" style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.76rem; letter-spacing:0.09em; text-transform:uppercase; text-decoration:none; color:#FFFFFF; border:1px solid rgba(255,255,255,0.34); padding:13px 15px;" style-hover="background:#FFFFFF; color:#161A20;">01 SoRA</a>
+          <a href="#work-02" style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.76rem; letter-spacing:0.09em; text-transform:uppercase; text-decoration:none; color:#FFFFFF; border:1px solid rgba(255,255,255,0.34); padding:13px 15px;" style-hover="background:#FFFFFF; color:#161A20;">02 Records</a>
+          <a href="#work-03" style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.76rem; letter-spacing:0.09em; text-transform:uppercase; text-decoration:none; color:#FFFFFF; border:1px solid rgba(255,255,255,0.34); padding:13px 15px;" style-hover="background:#FFFFFF; color:#161A20;">03 Wellbeing</a>
+          <a href="#work-04" style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.76rem; letter-spacing:0.09em; text-transform:uppercase; text-decoration:none; color:#FFFFFF; border:1px solid rgba(255,255,255,0.34); padding:13px 15px;" style-hover="background:#FFFFFF; color:#161A20;">04 Accessibility</a>
+          <a href="#work-05" style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.76rem; letter-spacing:0.09em; text-transform:uppercase; text-decoration:none; color:#FFFFFF; border:1px solid rgba(255,255,255,0.34); padding:13px 15px;" style-hover="background:#FFFFFF; color:#161A20;">05 Safeguarding</a>
+          <a href="#work-06" style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.76rem; letter-spacing:0.09em; text-transform:uppercase; text-decoration:none; color:#FFFFFF; border:1px solid rgba(255,255,255,0.34); padding:13px 15px;" style-hover="background:#FFFFFF; color:#161A20;">06 Signposting</a>
+          <a href="#work-07" style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.76rem; letter-spacing:0.09em; text-transform:uppercase; text-decoration:none; color:#FFFFFF; border:1px solid rgba(255,255,255,0.34); padding:13px 15px;" style-hover="background:#FFFFFF; color:#161A20;">07 Pipeline</a>
+          <a href="#work-08" style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.76rem; letter-spacing:0.09em; text-transform:uppercase; text-decoration:none; color:#FFFFFF; border:1px solid rgba(255,255,255,0.34); padding:13px 15px;" style-hover="background:#FFFFFF; color:#161A20;">08 Welcome Week</a>
+          <a href="#work-09" style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.76rem; letter-spacing:0.09em; text-transform:uppercase; text-decoration:none; color:#FFFFFF; border:1px solid rgba(255,255,255,0.34); padding:13px 15px;" style-hover="background:#FFFFFF; color:#161A20;">09 Period products</a>
+        </div>
+      </div>
+    </section>
+
+    <article id="work-01" data-screen-label="SoRA" style="scroll-margin-top:70px;">
+      <div style="background:var(--accent,#1F4E79); color:#FFFFFF;">
+        <div data-case-header="" style="max-width:1240px; margin:0 auto; padding:clamp(1.8rem,4vw,2.8rem) clamp(1.5rem,5vw,3rem); display:flex; gap:clamp(1.2rem,3vw,3rem); flex-wrap:wrap; align-items:flex-end; justify-content:space-between;">
+          <div style="flex:1 1 340px;">
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; color:rgba(255,255,255,0.72);">01 / SORA</p>
+            <h2 style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(1.6rem,3.4vw,2.6rem); line-height:1.06; letter-spacing:-0.02em; margin-top:0.7rem; color:#FFFFFF;">SEN Exam Support Tool</h2>
+            <p style="font-size:0.98rem; line-height:1.5; color:rgba(255,255,255,0.8); margin-top:0.6rem; font-style:italic; max-width:52ch;">The tool checks the registers for me, and no student data leaves the device.</p>
+          
+            <button type="button" data-case-toggle="" aria-expanded="false" style="margin-top:clamp(0.9rem,2vw,1.25rem); display:inline-flex; align-items:center; gap:10px; min-height:44px; padding:0; background:transparent; border:0; color:#FFFFFF; cursor:pointer; text-align:left; font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; text-transform:uppercase; border-bottom:1px solid rgba(255,255,255,0.42); transition:border-color .22s ease, opacity .22s ease;" style-hover="border-color:#FFFFFF; opacity:0.78;">
+              <span data-case-label="">Read the case detail</span>
+              <span data-case-icon="" aria-hidden="true" style="font-size:0.9rem; line-height:1;">↓</span>
+            </button>
+          </div>
+          <div data-case-stat="" style="flex:0 0 auto; text-align:right;">
+            <p style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(1.7rem,3.8vw,2.6rem); line-height:1; letter-spacing:-0.03em; color:#FFFFFF;">24 min → 30 sec</p>
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.72); margin-top:0.5rem;">by hand, uninterrupted → with the tool</p>
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.08em; text-transform:uppercase; color:#FFFFFF; margin-top:0.35rem;">same task, to scale · 28 groups</p>
+          </div>
+        </div>
+      </div>
+      <div data-case-body="" style="display:none; max-width:1240px; margin:0 auto; padding:clamp(2rem,4vw,3rem) clamp(1.5rem,5vw,3rem) clamp(3rem,6vw,4.5rem);">
+        <div data-split="" style="display:grid; grid-template-columns:minmax(0,0.62fr) minmax(0,1.38fr); gap:clamp(1.6rem,5vw,3.4rem);">
+          <div>
+            <div style="display:flex; flex-wrap:wrap; gap:7px;">
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">Excel VLOOKUP</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">Local web tool</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid var(--accent,#1F4E79); padding:6px 10px; color:var(--accent,#1F4E79);">On-device</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid var(--accent,#1F4E79); padding:6px 10px; color:var(--accent,#1F4E79);">WCAG 2.2 AA</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid var(--accent,#1F4E79); padding:6px 10px; color:var(--accent,#1F4E79);">UK GDPR</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">axe-core · 0 violations</span>
+            </div>
+            <figure style="margin:clamp(1.4rem,3vw,2rem) 0 0;">
+              <img src="uploads/Screenshot 2026-07-03 140117.jpg" alt="SEN Exam Support Tool interface" style="width:100%; height:auto; display:block; border:1px solid #DCE0E6;">
+              <figcaption style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.08em; color:#5C6470; margin-top:8px;">SEN Exam Support Tool · anonymised / synthetic data</figcaption>
+            </figure>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:1.3rem;">
+            <div style="background:#F3F4F6; padding:clamp(1.2rem,2.6vw,1.8rem); display:flex; flex-direction:column; gap:0.8rem;">
+              <p style="font-family:'Hanken Grotesk',sans-serif; font-size:0.94rem; line-height:1.6; color:#39414E;"><strong style="color:#161A20;">Scale:</strong> 15 modules · 28 exam groups · 4 to 80 students in each group, about 1,000 students. I checked them by hand under exam-season deadlines.</p>
+              <p style="font-family:'Hanken Grotesk',sans-serif; font-size:0.94rem; line-height:1.6; color:#39414E; border-top:1px solid #DCE0E6; padding-top:0.8rem;"><strong style="color:#161A20;">Plus:</strong> I consolidated the termly lecturer-notify workflow into one master sheet. It went from 3 days to 1 day, 155 emails with near-zero errors.</p>
+            </div>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">Problem</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">For every exam, someone has to check two separate registers against each other. I did it by hand: downloading the per-subject lists, checking them against the master disability support list, then chasing missing medical evidence. It was slow, it was easy to get wrong, and it handled special category data.</p>
+            </div>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">Constraint</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">The files hold special category disability data, covered by UK GDPR and the DPA 2018. There was no budget. Three rules set the compliance line: the Equality Act 2010, the Public Sector Bodies Accessibility Regulations 2018 (PSBAR), and WCAG 2.2 AA.</p>
+            </div>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">Scale</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">15 modules, 28 exam groups, between 4 and 80 students in each group, about 1,000 students in total. I checked them by hand under exam-season deadlines. If I get one wrong, that is a data breach.</p>
+            </div>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">What I built · the learning curve</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">It started as a two-day manual job. I got fluent with Excel formulas and cut it to two hours. Then I asked what AI could add, and rebuilt it as a local tool that runs in the browser. It reads the files and produces the adjustment list on its own. The browser reads the files on my own machine. Nothing is uploaded, nothing is changed, and the list clears when I refresh the page. It meets the Equality Act 2010 and PSBAR / WCAG 2.2 AA.</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62; margin-top:0.9rem;">The tool matches students by enrolment ID, so it skips the hand-typed register. That is the step most likely to go wrong. It then checks back in the other direction. It flags problems and never edits the file, and every flag goes to a person.</p>
+            </div>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">What this transfers</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">Other teams have the same problem: two lists that have to match. Anyone can run the check on their own files and get the same answer every time, and the tool also reports on the data quality of both registers. In an institution with a central records system, the same approach fits the exam and reasonable-adjustment processes already in place. Only the data source changes.</p>
+            </div>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">What I had to fix</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">Three things needed fixing. SoRA is special category data, so files are read in the browser and nothing is uploaded. One component had a known vulnerability, so I replaced it with a patched build. I now re-check the components each term, because a tool that people use has to be checked again. I had never tested my own accessibility, so I tested it with axe-core 4.13.0: 27 passes, 0 violations. That covers automated, machine-testable rules only, so it is not a conformance claim. The first real run also found 2 adjustment records that did not link back at all.</p>
+            </div>
+            <p style="font-family:'Hanken Grotesk',sans-serif; font-size:0.94rem; line-height:1.6; color:#5C6470; border-top:1px solid #DCE0E6; padding-top:1rem;"><strong style="color:#161A20; font-weight:600;">Status:</strong> it has one user so far, and that is me. Nobody else has tried it yet.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article id="work-02" data-screen-label="Student records" style="scroll-margin-top:70px;">
+      <div style="background:#161A20; color:#FFFFFF;">
+        <div data-case-header="" style="max-width:1240px; margin:0 auto; padding:clamp(1.8rem,4vw,2.8rem) clamp(1.5rem,5vw,3rem); display:flex; gap:clamp(1.2rem,3vw,3rem); flex-wrap:wrap; align-items:flex-end; justify-content:space-between;">
+          <div style="flex:1 1 340px;">
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; color:#AECBEE;">02 / Automation</p>
+            <h2 style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(1.6rem,3.4vw,2.6rem); line-height:1.06; letter-spacing:-0.02em; margin-top:0.7rem; color:#FFFFFF;">Student Records Automation</h2>
+          
+            <button type="button" data-case-toggle="" aria-expanded="false" style="margin-top:clamp(0.9rem,2vw,1.25rem); display:inline-flex; align-items:center; gap:10px; min-height:44px; padding:0; background:transparent; border:0; color:#FFFFFF; cursor:pointer; text-align:left; font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; text-transform:uppercase; border-bottom:1px solid rgba(255,255,255,0.42); transition:border-color .22s ease, opacity .22s ease;" style-hover="border-color:#FFFFFF; opacity:0.78;">
+              <span data-case-label="">Read the case detail</span>
+              <span data-case-icon="" aria-hidden="true" style="font-size:0.9rem; line-height:1;">↓</span>
+            </button>
+          </div>
+          <div data-case-stat="" style="flex:0 0 auto; text-align:right;">
+            <p style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(2.4rem,5.4vw,3.8rem); line-height:0.92; letter-spacing:-0.03em; color:#AECBEE;">99.5%</p>
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.66); margin-top:0.5rem;">faster · per record</p>
+          </div>
+        </div>
+      </div>
+      <div data-case-body="" style="display:none; max-width:1240px; margin:0 auto; padding:clamp(2rem,4vw,3rem) clamp(1.5rem,5vw,3rem) clamp(3rem,6vw,4.5rem);">
+        <div data-split="" style="display:grid; grid-template-columns:minmax(0,0.62fr) minmax(0,1.38fr); gap:clamp(1.6rem,5vw,3.4rem);">
+          <div>
+            <div style="display:flex; flex-wrap:wrap; gap:7px;">
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">Power Automate</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">SharePoint</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">No-AI runtime</span>
+            </div>
+            <div style="margin-top:clamp(1.4rem,3vw,2rem); display:flex; flex-direction:column; gap:14px;">
+              <figure style="margin:0;">
+                <img src="uploads/1762346790551.jpg" alt="Power Automate flow details showing 28-day run history with 00:00:09 average run duration" style="width:100%; height:auto; display:block; border:1px solid #DCE0E6;">
+                <figcaption style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.08em; color:#5C6470; margin-top:8px;">Proof · 28-day run history · 00:00:09 average</figcaption>
+              </figure>
+              <figure style="margin:0;">
+                <img src="uploads/1762346790453.jpg" alt="Power Automate flow: manually trigger, list rows from Excel, apply to each, create new folder in SharePoint" style="width:100%; height:auto; display:block; border:1px solid #DCE0E6;">
+                <figcaption style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.08em; color:#5C6470; margin-top:8px;">The flow · reads Excel, loops, creates folders</figcaption>
+              </figure>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:1.3rem;">
+            <div style="background:#F3F4F6; padding:clamp(1.2rem,2.6vw,1.8rem); display:flex; flex-direction:column; gap:0.9rem;">
+              <div>
+                <div style="display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:0.76rem; color:#5C6470; margin-bottom:0.4rem;"><span>Before · manual</span><span style="color:#161A20; font-weight:500;">~30 min</span></div>
+                <div style="height:12px; background:#E5E8EC; overflow:hidden;"><div style="height:100%; width:100%; background:#C5CAD2;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:0.76rem; color:#5C6470; margin-bottom:0.4rem;"><span>After · automated</span><span style="color:var(--accent,#1F4E79); font-weight:500;">00:00:09</span></div>
+                <div style="height:12px; background:#E5E8EC; overflow:hidden;"><div style="height:100%; width:2%; min-width:8px; background:var(--accent,#1F4E79);"></div></div>
+              </div>
+              <p style="font-family:'Hanken Grotesk',sans-serif; font-size:0.92rem; color:#39414E; border-top:1px solid #DCE0E6; padding-top:0.8rem;">0 manual-entry errors · no token use · free to run · reusable every term</p>
+            </div>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">Problem</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">Someone had to set up a folder and a record by hand for every student, about 30 minutes each, across more than 100 students. It was slow, repetitive and easy to get wrong.</p>
+            </div>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">Constraint</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">No IT support, no licence budget, and it had to run inside the tools the institution already had: Microsoft 365 only.</p>
+            </div>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">What I built · the key decision</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">This was my first automation project, and I built it with AI guidance. A Power Automate flow now creates each student's folder and documents in SharePoint: 30 minutes down to 9 seconds, with no typing errors. No AI runs inside it, so it costs nothing in tokens. I built it once and reuse it every term for free. Because it is Power Automate, it connects to the rest of the Microsoft tools the institution already has.</p>
+            </div>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">What this transfers</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">The same pattern fits any repeatable admin job in the Microsoft tools: enrolment packs, module registration, document generation. You build it once and it runs for free. Because no AI runs inside it, there is no token cost and no data leaves the tenant, so it is an easy first automation for a university team to approve.</p>
+            </div>
+            <p style="font-family:'Hanken Grotesk',sans-serif; font-size:0.92rem; color:#5C6470; border-top:1px solid #DCE0E6; padding-top:1rem;">Repo / demo · <a href="https://www.linkedin.com/posts/ruojing-kou-744170297_powerautomate-workflow-problemsolving-ugcPost-7391818199194890240-Vgwt/" target="_blank" rel="noopener" style="color:var(--accent,#1F4E79); text-decoration:none; border-bottom:1px dashed currentColor;">View on LinkedIn ↗</a></p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article id="work-03" data-screen-label="Wellbeing booking" style="scroll-margin-top:70px;">
+      <div style="background:var(--accent,#1F4E79); color:#FFFFFF;">
+        <div data-case-header="" style="max-width:1240px; margin:0 auto; padding:clamp(1.8rem,4vw,2.8rem) clamp(1.5rem,5vw,3rem); display:flex; gap:clamp(1.2rem,3vw,3rem); flex-wrap:wrap; align-items:flex-end; justify-content:space-between;">
+          <div style="flex:1 1 340px;">
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; color:rgba(255,255,255,0.72);">03 / Wellbeing</p>
+            <h2 style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(1.6rem,3.4vw,2.6rem); line-height:1.06; letter-spacing:-0.02em; margin-top:0.7rem; color:#FFFFFF;">Self-Service Wellbeing Booking System</h2>
+          
+            <button type="button" data-case-toggle="" aria-expanded="false" style="margin-top:clamp(0.9rem,2vw,1.25rem); display:inline-flex; align-items:center; gap:10px; min-height:44px; padding:0; background:transparent; border:0; color:#FFFFFF; cursor:pointer; text-align:left; font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; text-transform:uppercase; border-bottom:1px solid rgba(255,255,255,0.42); transition:border-color .22s ease, opacity .22s ease;" style-hover="border-color:#FFFFFF; opacity:0.78;">
+              <span data-case-label="">Read the case detail</span>
+              <span data-case-icon="" aria-hidden="true" style="font-size:0.9rem; line-height:1;">↓</span>
+            </button>
+          </div>
+          <div data-case-stat="" style="flex:0 0 auto; text-align:right;">
+            <p style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(2.4rem,5.4vw,3.8rem); line-height:0.92; letter-spacing:-0.03em; color:#FFFFFF;">60–70%</p>
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.72); margin-top:0.5rem;">less admin email</p>
+          </div>
+        </div>
+      </div>
+      <div data-case-body="" style="display:none; max-width:1240px; margin:0 auto; padding:clamp(2rem,4vw,3rem) clamp(1.5rem,5vw,3rem) clamp(3rem,6vw,4.5rem);">
+        <div data-split="" style="display:grid; grid-template-columns:minmax(0,0.62fr) minmax(0,1.38fr); gap:clamp(1.6rem,5vw,3.4rem);">
+          <div>
+            <div style="display:flex; flex-wrap:wrap; gap:7px;">
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">Microsoft Bookings</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">AI-assisted config</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">Data visualisation</span>
+            </div>
+            <figure style="margin:clamp(1.4rem,3vw,2rem) 0 0;">
+              <img src="uploads/Screenshot 2026-07-03 135303.jpg" alt="Booking demand dashboard" style="width:100%; height:auto; display:block; border:1px solid #DCE0E6;">
+              <figcaption style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.08em; color:#5C6470; margin-top:8px;">Demand dashboard · anonymised / synthetic data</figcaption>
+            </figure>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:1.3rem;">
+            <div style="background:#F3F4F6; padding:clamp(1.2rem,2.6vw,1.8rem); display:flex; flex-direction:column; gap:0.9rem;">
+              <div>
+                <div style="display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:0.76rem; color:#5C6470; margin-bottom:0.4rem;"><span>Admin email · before</span><span style="color:#161A20; font-weight:500;">100%</span></div>
+                <div style="height:12px; background:#E5E8EC; overflow:hidden;"><div style="height:100%; width:100%; background:#C5CAD2;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:0.76rem; color:#5C6470; margin-bottom:0.4rem;"><span>Admin email · after</span><span style="color:var(--accent,#1F4E79); font-weight:500;">~30–40%</span></div>
+                <div style="height:12px; background:#E5E8EC; overflow:hidden;"><div style="height:100%; width:34%; background:var(--accent,#1F4E79);"></div></div>
+              </div>
+              <p style="font-family:'Hanken Grotesk',sans-serif; font-size:0.92rem; color:#39414E; border-top:1px solid #DCE0E6; padding-top:0.8rem;">From reacting to requests → planning workshops and staffing from the data</p>
+            </div>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">Problem</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">Demand for 1:1 wellbeing sessions rose sharply. Booking every session by email made students wait and put pressure on the counsellors and on me.</p>
+            </div>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">Constraint</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">Students book this when they are already distressed. The system had to make asking for help easier rather than harder, and it had to keep the intake data small and secure.</p>
+            </div>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">What I built</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">Students now book their own slot and fill in a short intake questionnaire. I also built a dashboard that shows demand by subject area and type of concern.</p>
+            </div>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">What this transfers</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">The service moved from reacting to requests to planning from data. The dashboard turned anecdotes into evidence I could use to argue for staffing. The same intake form and dashboard would work for any student-facing support service: academic skills, disability support, careers appointments.</p>
+            </div>
+            <p style="font-family:'Hanken Grotesk',sans-serif; font-size:0.92rem; color:#5C6470; border-top:1px solid #DCE0E6; padding-top:1rem;">Demo · available on request</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article id="work-04" data-screen-label="Document accessibility" style="scroll-margin-top:70px;">
+      <div style="background:#161A20; color:#FFFFFF;">
+        <div data-case-header="" style="max-width:1240px; margin:0 auto; padding:clamp(1.8rem,4vw,2.8rem) clamp(1.5rem,5vw,3rem); display:flex; gap:clamp(1.2rem,3vw,3rem); flex-wrap:wrap; align-items:flex-end; justify-content:space-between;">
+          <div style="flex:1 1 340px;">
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; color:#AECBEE;">04 / Accessibility</p>
+            <h2 style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(1.6rem,3.4vw,2.6rem); line-height:1.06; letter-spacing:-0.02em; margin-top:0.7rem; color:#FFFFFF;">Document Accessibility Pilot</h2>
+            <p style="font-size:0.98rem; line-height:1.5; color:rgba(255,255,255,0.78); margin-top:0.6rem; font-style:italic; max-width:52ch;">Students understood the words. The documents were built wrong.</p>
+          
+            <button type="button" data-case-toggle="" aria-expanded="false" style="margin-top:clamp(0.9rem,2vw,1.25rem); display:inline-flex; align-items:center; gap:10px; min-height:44px; padding:0; background:transparent; border:0; color:#FFFFFF; cursor:pointer; text-align:left; font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; text-transform:uppercase; border-bottom:1px solid rgba(255,255,255,0.42); transition:border-color .22s ease, opacity .22s ease;" style-hover="border-color:#FFFFFF; opacity:0.78;">
+              <span data-case-label="">Read the case detail</span>
+              <span data-case-icon="" aria-hidden="true" style="font-size:0.9rem; line-height:1;">↓</span>
+            </button>
+          </div>
+          <div data-case-stat="" style="flex:0 0 auto; text-align:right;">
+            <p style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(2.4rem,5.4vw,3.8rem); line-height:0.92; letter-spacing:-0.03em; color:#AECBEE;">0 of 4</p>
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.66); margin-top:0.5rem; max-width:210px; line-height:1.6;">student-facing documents passed the checker</p>
+          </div>
+        </div>
+      </div>
+      <div data-case-body="" style="display:none; max-width:1240px; margin:0 auto; padding:clamp(2rem,4vw,3rem) clamp(1.5rem,5vw,3rem) clamp(3rem,6vw,4.5rem);">
+        <div data-split="" style="display:grid; grid-template-columns:minmax(0,0.62fr) minmax(0,1.38fr); gap:clamp(1.6rem,5vw,3.4rem);">
+          <div>
+            <div style="display:flex; flex-wrap:wrap; gap:7px;">
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">PAC audit</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">PDF/UA (ISO 14289-1)</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">SCULPT extended</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid var(--accent,#1F4E79); padding:6px 10px; color:var(--accent,#1F4E79);">Equality Act 2010</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid var(--accent,#1F4E79); padding:6px 10px; color:var(--accent,#1F4E79);">PSBAR 2018</span>
+            </div>
+            <figure style="margin:clamp(1.4rem,3vw,2rem) 0 0;">
+              <img src="uploads/project_screenshots-1787485524860-f5ny.png" alt="Before and after comparison: the original SORA guidance document as dense numbered paragraphs, beside the rebuilt version showing Your SORA in six steps as a numbered diagram, with a list of what changed" style="width:100%; height:auto; display:block; border:1px solid #DCE0E6;">
+              <figcaption style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.08em; color:#5C6470; margin-top:8px;">Visual rebuild comparison · the rebuilt version</figcaption>
+            </figure>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:1.3rem;">
+            <div style="background:#F3F4F6; padding:clamp(1.2rem,2.6vw,1.8rem); display:flex; flex-direction:column; gap:0.9rem;">
+              <div>
+                <div style="display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:0.76rem; color:#5C6470; margin-bottom:0.4rem;"><span>Structural errors · before</span><span style="color:#161A20; font-weight:500;">15,000+</span></div>
+                <div style="height:12px; background:#E5E8EC; overflow:hidden;"><div style="height:100%; width:100%; background:#C5CAD2;"></div></div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:0.76rem; color:#5C6470; margin-bottom:0.4rem;"><span>After rebuilding</span><span style="color:var(--accent,#1F4E79); font-weight:500;">~30</span></div>
+                <div style="height:12px; background:#E5E8EC; overflow:hidden;"><div style="height:100%; width:2%; min-width:8px; background:var(--accent,#1F4E79);"></div></div>
+              </div>
+              <p style="font-family:'Hanken Grotesk',sans-serif; font-size:0.94rem; line-height:1.6; color:#39414E; border-top:1px solid #DCE0E6; padding-top:0.8rem;"><strong style="color:#161A20;">9-point checklist:</strong> SCULPT extended from six after testing exposed two gaps.</p>
+            </div>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">Problem</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">Students kept asking about things the material already answered. At the front desk we answered the same questions one student at a time. In class, trainers used teaching time to explain points the document was supposed to carry. Every one of those questions was a student spending time on the document instead of on the course. The documents looked tidy. Nobody had measured them.</p>
+            </div>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">Constraint</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">Three things I could not change. Free tools only, so I used PAC, which runs offline, and the measurement never left my laptop. There was no route to ask for a data-protection review, so I used published material only and no student records. And there is no route for me to publish the fixed version. I can measure a document and I can fix it. Someone else has to publish it.</p>
+            </div>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">What I built</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">I tested four documents with PAC (axes4) against PDF/UA (ISO 14289-1) and the machine-checkable WCAG 2.1 criteria. None of them passed, and one file had over 15,000 structural errors. I rebuilt that file and re-tested it: about 30 errors, a 99.8% drop. The rebuild changed five things. Language: short sentences, active voice. Structure: clear headings, numbered steps. Readability: bold key terms and spacing that does not crowd the page. Connective logic: signposting that helps readers with ADHD and dyslexia follow the thread. Alt text: a description for every diagram and image. I worked in my work account only, inside the Microsoft 365 boundary and under enterprise data protection. AI helped me rebuild the file. The check is a rules engine, not AI, so anyone can re-run it and get the same answer, and I read every change myself. Testing also exposed two gaps in the SCULPT framework, so I extended it into a nine-point checklist.</p>
+            </div>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">What this transfers</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">The regulations already cover the VLE, and the Equality Act duty is anticipatory. It does not wait for a student to ask. Build accessibility in from the start rather than adding it afterwards, and measure the real baseline before trusting any checklist.</p>
+            </div>
+            <p style="font-family:'Hanken Grotesk',sans-serif; font-size:0.94rem; line-height:1.6; color:#5C6470; border-top:1px solid #DCE0E6; padding-top:1rem;"><strong style="color:#161A20; font-weight:600;">Honest limits:</strong> the finding is that 0 of 4 passed. The 99.8% drop only shows that one file can be fixed. This is a pilot on one document and it has not gone to students. Automated checks are not a conformance claim, and I have not measured whether enquiries went down.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article id="work-05" data-screen-label="Safeguarding training" style="scroll-margin-top:70px;">
+      <div style="background:var(--accent,#1F4E79); color:#FFFFFF;">
+        <div data-case-header="" style="max-width:1240px; margin:0 auto; padding:clamp(1.8rem,4vw,2.8rem) clamp(1.5rem,5vw,3rem); display:flex; gap:clamp(1.2rem,3vw,3rem); flex-wrap:wrap; align-items:flex-end; justify-content:space-between;">
+          <div style="flex:1 1 340px;">
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; color:rgba(255,255,255,0.72);">05 / Staff development</p>
+            <h2 style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(1.6rem,3.4vw,2.6rem); line-height:1.06; letter-spacing:-0.02em; margin-top:0.7rem; color:#FFFFFF;">Safeguarding Training Design</h2>
+          
+            <button type="button" data-case-toggle="" aria-expanded="false" style="margin-top:clamp(0.9rem,2vw,1.25rem); display:inline-flex; align-items:center; gap:10px; min-height:44px; padding:0; background:transparent; border:0; color:#FFFFFF; cursor:pointer; text-align:left; font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; text-transform:uppercase; border-bottom:1px solid rgba(255,255,255,0.42); transition:border-color .22s ease, opacity .22s ease;" style-hover="border-color:#FFFFFF; opacity:0.78;">
+              <span data-case-label="">Read the case detail</span>
+              <span data-case-icon="" aria-hidden="true" style="font-size:0.9rem; line-height:1;">↓</span>
+            </button>
+          </div>
+          <div data-case-stat="" style="flex:0 0 auto; text-align:right;">
+            <p style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(1.9rem,4.4vw,3rem); line-height:0.95; letter-spacing:-0.03em; color:#FFFFFF;">Half a day</p>
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.72); margin-top:0.5rem;">brief to delivery</p>
+          </div>
+        </div>
+      </div>
+      <div data-case-body="" style="display:none; max-width:1240px; margin:0 auto; padding:clamp(2rem,4vw,3rem) clamp(1.5rem,5vw,3rem) clamp(3rem,6vw,4.5rem);">
+        <div data-split="" style="display:grid; grid-template-columns:minmax(0,0.62fr) minmax(0,1.38fr); gap:clamp(1.6rem,5vw,3.4rem);">
+          <div style="display:flex; flex-wrap:wrap; gap:7px; align-content:flex-start;">
+            <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">Staff development</span>
+            <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">Accessible design</span>
+            <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">AI-assisted</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:1.3rem;">
+            <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">I had half a day from brief to delivery. I made accessible training materials for staff who support vulnerable learners: disabled students, refugees, and adults returning to education. An AI-configured design system kept the type, contrast and layout consistent. My design background turned dense protocol text into clear visual aids. I hold a Safeguarding Adults certificate (Virtual College, 2026).</p>
+            <p style="font-family:'Hanken Grotesk',sans-serif; font-size:0.94rem; line-height:1.6; color:var(--accent,#1F4E79); border-top:1px solid #DCE0E6; padding-top:1rem;"><strong style="font-weight:600;">Transfers as:</strong> a fast, reusable pattern for any staff-facing learning resource.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article id="work-06" data-screen-label="Find Support" style="scroll-margin-top:70px;">
+      <div style="background:#161A20; color:#FFFFFF;">
+        <div data-case-header="" style="max-width:1240px; margin:0 auto; padding:clamp(1.8rem,4vw,2.8rem) clamp(1.5rem,5vw,3rem); display:flex; gap:clamp(1.2rem,3vw,3rem); flex-wrap:wrap; align-items:flex-end; justify-content:space-between;">
+          <div style="flex:1 1 340px;">
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; color:#AECBEE;">06 / Signposting</p>
+            <h2 style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(1.6rem,3.4vw,2.6rem); line-height:1.06; letter-spacing:-0.02em; margin-top:0.7rem; color:#FFFFFF;">Find Support in Manchester</h2>
+          
+            <button type="button" data-case-toggle="" aria-expanded="false" style="margin-top:clamp(0.9rem,2vw,1.25rem); display:inline-flex; align-items:center; gap:10px; min-height:44px; padding:0; background:transparent; border:0; color:#FFFFFF; cursor:pointer; text-align:left; font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; text-transform:uppercase; border-bottom:1px solid rgba(255,255,255,0.42); transition:border-color .22s ease, opacity .22s ease;" style-hover="border-color:#FFFFFF; opacity:0.78;">
+              <span data-case-label="">Read the case detail</span>
+              <span data-case-icon="" aria-hidden="true" style="font-size:0.9rem; line-height:1;">↓</span>
+            </button>
+          </div>
+          <div data-case-stat="" style="flex:0 0 auto; text-align:right;">
+            <p style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(2.4rem,5.4vw,3.8rem); line-height:0.92; letter-spacing:-0.03em; color:#AECBEE;">24</p>
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.66); margin-top:0.5rem; max-width:210px; line-height:1.6;">organisations, each verified by hand</p>
+          </div>
+        </div>
+      </div>
+      <div data-case-body="" style="display:none; max-width:1240px; margin:0 auto; padding:clamp(2rem,4vw,3rem) clamp(1.5rem,5vw,3rem) clamp(3rem,6vw,4.5rem);">
+        <div data-split="" style="display:grid; grid-template-columns:minmax(0,0.62fr) minmax(0,1.38fr); gap:clamp(1.6rem,5vw,3.4rem);">
+          <div>
+            <div style="display:flex; flex-wrap:wrap; gap:7px;">
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">AI-built</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">Signposting</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">Open source</span>
+            </div>
+            <figure style="margin:clamp(1.4rem,3vw,2rem) 0 0;">
+              <img src="uploads/signpost web-a01f163b.png" alt="Find Support in Manchester tool — a screen asking &quot;What would help right now?&quot; with selectable topic cards like feeling low or anxious, activities, neurodivergent, LGBT+, women's support, volunteering, safe housing and just wanting to talk" style="width:100%; height:auto; display:block; border:1px solid #DCE0E6;">
+              <figcaption style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.08em; color:#5C6470; margin-top:8px;">Students pick what they need, not who they are</figcaption>
+            </figure>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:1.2rem;">
+            <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">Students came to us for stress and anxiety (44%), finance, family and relationships (33%), studies (8%), and health or sleep (6%). Some of what they need sits outside the campus, and not every student tells us on their own. UCAS found in 2021 that 49% of first-year students had not told their university about a mental health condition. So I asked whether this could work without anyone having to disclose anything. Nobody should have to claim a label just to get a list of links. There is no form, no account and no record, and 999 is on every screen.</p>
+            <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">I built a tracker for every organisation and contacted all of them. I approached 26 local organisations, and took 6 of them further this year with a meeting and then a visit. I made a paper handout students could take away, and then built the web version.</p>
+            <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">I checked it in three ways. Technical: 41 automated checks, 38 passed and 3 failed, and I fixed the 3. Content: I checked all 24 organisations one by one against the Charity Commission register. 21 were confirmed on the register. 3 had no registration, and one was trading under a new name. I corrected or removed those and added an annual re-check. All 24 rows were signed off on 6 August 2026. Inclusion: no form, no account, no record.</p>
+            <p style="font-family:'Hanken Grotesk',sans-serif; font-size:0.94rem; line-height:1.6; color:#5C6470; border-top:1px solid #DCE0E6; padding-top:1rem;"><strong style="color:#161A20; font-weight:600;">Status:</strong> we made the printed guide with the team and Marketing. It is approved and scheduled for every new student's Welcome Bag in September 2026. The online route is built. Nobody is using it yet. Print numbers sit with Marketing.</p>
+            <p style="font-family:'Hanken Grotesk',sans-serif; font-size:0.94rem; line-height:1.6; color:var(--accent,#1F4E79);"><strong style="font-weight:600;">Transfers as:</strong> an open-source signposting pattern that any student services team can copy and adapt to their own area.</p>
+            <p style="font-family:'Hanken Grotesk',sans-serif; font-size:0.94rem;"><a href="https://rjunderstand.github.io/Find-support-in-Manchester/" target="_blank" rel="noopener" style="color:var(--accent,#1F4E79); text-decoration:none; border-bottom:1px dashed currentColor;">Open the tool ↗</a></p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article id="work-07" data-screen-label="Sector pipeline" style="scroll-margin-top:70px;">
+      <div style="background:var(--accent,#1F4E79); color:#FFFFFF;">
+        <div data-case-header="" style="max-width:1240px; margin:0 auto; padding:clamp(1.8rem,4vw,2.8rem) clamp(1.5rem,5vw,3rem); display:flex; gap:clamp(1.2rem,3vw,3rem); flex-wrap:wrap; align-items:flex-end; justify-content:space-between;">
+          <div style="flex:1 1 340px;">
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; color:rgba(255,255,255,0.72);">07 / How I stay current</p>
+            <h2 style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(1.6rem,3.4vw,2.6rem); line-height:1.06; letter-spacing:-0.02em; margin-top:0.7rem; color:#FFFFFF;">No-Code Sector Intelligence Pipeline</h2>
+            <p style="font-size:0.98rem; line-height:1.5; color:rgba(255,255,255,0.8); margin-top:0.6rem; font-style:italic; max-width:52ch;">The workflow does the routine steps. I still make the judgement calls.</p>
+          
+            <button type="button" data-case-toggle="" aria-expanded="false" style="margin-top:clamp(0.9rem,2vw,1.25rem); display:inline-flex; align-items:center; gap:10px; min-height:44px; padding:0; background:transparent; border:0; color:#FFFFFF; cursor:pointer; text-align:left; font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; text-transform:uppercase; border-bottom:1px solid rgba(255,255,255,0.42); transition:border-color .22s ease, opacity .22s ease;" style-hover="border-color:#FFFFFF; opacity:0.78;">
+              <span data-case-label="">Read the case detail</span>
+              <span data-case-icon="" aria-hidden="true" style="font-size:0.9rem; line-height:1;">↓</span>
+            </button>
+          </div>
+          <div data-case-stat="" style="flex:0 0 auto; text-align:right;">
+            <p style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(2.6rem,6vw,4rem); line-height:0.92; letter-spacing:-0.03em; color:#FFFFFF;">£0</p>
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.72); margin-top:0.5rem;">to run · no-code</p>
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.08em; text-transform:uppercase; color:#FFFFFF; margin-top:0.35rem;">reading week · 3–4 hrs → ~30 min</p>
+          </div>
+        </div>
+      </div>
+      <div data-case-body="" style="display:none; max-width:1240px; margin:0 auto; padding:clamp(2rem,4vw,3rem) clamp(1.5rem,5vw,3rem) clamp(3rem,6vw,4.5rem);">
+        <div data-split="" style="display:grid; grid-template-columns:minmax(0,0.62fr) minmax(0,1.38fr); gap:clamp(1.6rem,5vw,3.4rem);">
+          <div>
+            <div style="display:flex; flex-wrap:wrap; gap:7px;">
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">Make.com</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">Notion</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">No-code</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">v1 free tier</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">v2 structured JSON</span>
+            </div>
+            <div style="margin-top:clamp(1.4rem,3vw,2rem); display:flex; flex-direction:column; gap:14px;">
+              <figure style="margin:0;">
+                <img src="uploads/EG-dce7339a.png" alt="Make.com scenario diagram: an RSS feed watches items, creates a Notion database item, an AI agent processes it, then updates the Notion data source" style="width:100%; height:auto; display:block; border:1px solid #DCE0E6;">
+                <figcaption style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.08em; color:#5C6470; margin-top:8px;">The pipeline · Make.com scenario tuned to maximise token use</figcaption>
+              </figure>
+              <figure style="margin:0;">
+                <img src="uploads/notion.png" alt="Notion database titled Industry Notes with columns for Content, Type, Category, Key Takeaway, Why It Matters, Relevance, Need Full Text, Date and URL" style="width:100%; height:auto; display:block; border:1px solid #DCE0E6;">
+                <figcaption style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.08em; color:#5C6470; margin-top:8px;">The output · organised in Notion for easy review and search</figcaption>
+              </figure>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:1.1rem;">
+            <p style="font-family:'Hanken Grotesk',sans-serif; font-size:0.94rem; line-height:1.6; color:var(--accent,#1F4E79); background:#F3F4F6; padding:1rem 1.2rem;">Presenting at TIRIAE 2026 · UGM Bolton campus · 3 September · Paper 116 · 7-minute lightning talk and A1 poster</p>
+            <div>
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.5rem;">What I learned</p>
+              <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">Professional services staff in higher education are expected to keep up with a sector that changes fast. In a full-time role there is rarely time to gather, filter and use that information without taking it out of life outside work. That leaves a practical gap: a way to stay current that takes little effort and needs no technical background.</p>
+            </div>
+            <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;"><strong style="font-weight:600;">Rationale.</strong> I chose an AI-assisted, no-code route because the alternatives ask too much. Conventional automation and custom development need technical skill, cost time and money to maintain, and stay limited without programming. I found that out myself using standard automation tools. No-code platforms with AI support lower the barrier enough that staff without a technical background can build something that works.</p>
+            <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;"><strong style="font-weight:600;">Methodology and approach.</strong> The design logic matters more than the software. I described the problem to an AI assistant in plain language, like a product brief: who would use it, what they needed, and what it had to do. The assistant offered several options. I picked the one that suited my background and my constraints, then built it step by step, using screenshots whenever an instruction was unclear. Evaluating, choosing and building this way produced one connected workflow. It collects sector updates, summarises them with a large language model, filters the results, and files them in one place I can search. The stages run automatically, one after the other. I set it up in about half a day, with no technical training and an arts background, using no-code tools anyone can get. It has run without my help since.</p>
+            <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;"><strong style="font-weight:600;">Results and findings.</strong> Following the sector used to be scattered and slow. Now it is a short routine, and I can read the output at any time on my work computer, my own laptop or my phone. Using it showed me one clear strength and one clear limit of AI. The strength is understanding and recommending: it draws on a wide range of tools and options, and closes gaps I could not close on my own. The limit is step-by-step guidance. That help is still text, so I still have to work out which written instruction means which action on screen.</p>
+            <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;"><strong style="font-weight:600;">Conclusions and implications.</strong> The model matters more than the tool. This is a low-cost approach that colleagues without a technical background can repeat by following the same steps. I am also looking at a more structured, searchable version, because filtering and finding information gets harder as the volume grows. Working with machines this way should let people use more of their own creativity, not take their work away.</p>
+            <div style="border-top:1px solid #DCE0E6; padding-top:1rem;">
+              <p style="font-family:'IBM Plex Mono',monospace; font-size:0.76rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#1F4E79); margin-bottom:0.6rem;">Limitations, in three tiers</p>
+              <p style="font-size:clamp(0.98rem,1.4vw,1.08rem); line-height:1.6; color:#39414E;"><strong style="color:#161A20; font-weight:600;">Technical, now fixed.</strong> I moved the relevance filter earlier in the chain.</p>
+              <p style="font-size:clamp(0.98rem,1.4vw,1.08rem); line-height:1.6; color:#39414E; margin-top:0.5rem;"><strong style="color:#161A20; font-weight:600;">Structural.</strong> The platform cost nothing, but someone still had to know how to build it.</p>
+              <p style="font-size:clamp(0.98rem,1.4vw,1.08rem); line-height:1.6; color:#39414E; margin-top:0.5rem;"><strong style="color:#161A20; font-weight:600;">Epistemic.</strong> I only see what my own search terms find, and only what people publish openly. If something is missing, nothing tells me it is missing.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article id="work-08" data-screen-label="Welcome Week" style="scroll-margin-top:70px;">
+      <div style="background:#161A20; color:#FFFFFF;">
+        <div data-case-header="" style="max-width:1240px; margin:0 auto; padding:clamp(1.8rem,4vw,2.8rem) clamp(1.5rem,5vw,3rem); display:flex; gap:clamp(1.2rem,3vw,3rem); flex-wrap:wrap; align-items:flex-end; justify-content:space-between;">
+          <div style="flex:1 1 340px;">
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; color:#AECBEE;">08 / Student engagement</p>
+            <h2 style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(1.6rem,3.4vw,2.6rem); line-height:1.06; letter-spacing:-0.02em; margin-top:0.7rem; color:#FFFFFF;">Welcome Week Wellbeing Sessions</h2>
+          
+            <button type="button" data-case-toggle="" aria-expanded="false" style="margin-top:clamp(0.9rem,2vw,1.25rem); display:inline-flex; align-items:center; gap:10px; min-height:44px; padding:0; background:transparent; border:0; color:#FFFFFF; cursor:pointer; text-align:left; font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; text-transform:uppercase; border-bottom:1px solid rgba(255,255,255,0.42); transition:border-color .22s ease, opacity .22s ease;" style-hover="border-color:#FFFFFF; opacity:0.78;">
+              <span data-case-label="">Read the case detail</span>
+              <span data-case-icon="" aria-hidden="true" style="font-size:0.9rem; line-height:1;">↓</span>
+            </button>
+          </div>
+          <div data-case-stat="" style="flex:0 0 auto; text-align:right;">
+            <p style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(2.2rem,5vw,3.4rem); line-height:0.92; letter-spacing:-0.03em; color:#AECBEE;">10–15 min</p>
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.66); margin-top:0.5rem; max-width:210px; line-height:1.6;">live session for every incoming student group</p>
+          </div>
+        </div>
+      </div>
+      <div data-case-body="" style="display:none; max-width:1240px; margin:0 auto; padding:clamp(2rem,4vw,3rem) clamp(1.5rem,5vw,3rem) clamp(3rem,6vw,4.5rem);">
+        <div data-split="" style="display:grid; grid-template-columns:minmax(0,0.62fr) minmax(0,1.38fr); gap:clamp(1.6rem,5vw,3.4rem);">
+          <div style="display:flex; flex-wrap:wrap; gap:7px; align-content:flex-start;">
+            <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">Student engagement</span>
+            <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">Presentation</span>
+            <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">Multilingual design</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:1.3rem;">
+            <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">I introduced the Wellbeing, Disability and Inclusion team to every incoming student group during Welcome Week. I wrote the deck and gave a 10 to 15 minute session to each group, adjusting it for each room. For a multilingual audience I designed a one-page guide with its own icon and illustration set, so students who missed a session still got the information.</p>
+            <p style="font-family:'Hanken Grotesk',sans-serif; font-size:0.94rem; line-height:1.6; color:var(--accent,#1F4E79); border-top:1px solid #DCE0E6; padding-top:1rem;"><strong style="font-weight:600;">Transfers as:</strong> a short live session plus a guide that works on its own, reusable for any induction.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article id="work-09" data-screen-label="Period products" style="scroll-margin-top:70px;">
+      <div style="background:var(--accent,#1F4E79); color:#FFFFFF;">
+        <div data-case-header="" style="max-width:1240px; margin:0 auto; padding:clamp(1.8rem,4vw,2.8rem) clamp(1.5rem,5vw,3rem); display:flex; gap:clamp(1.2rem,3vw,3rem); flex-wrap:wrap; align-items:flex-end; justify-content:space-between;">
+          <div style="flex:1 1 340px;">
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; color:rgba(255,255,255,0.72);">09 / Campaign</p>
+            <h2 style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(1.6rem,3.4vw,2.6rem); line-height:1.06; letter-spacing:-0.02em; margin-top:0.7rem; color:#FFFFFF;">Free Period Products Station</h2>
+          
+            <button type="button" data-case-toggle="" aria-expanded="false" style="margin-top:clamp(0.9rem,2vw,1.25rem); display:inline-flex; align-items:center; gap:10px; min-height:44px; padding:0; background:transparent; border:0; color:#FFFFFF; cursor:pointer; text-align:left; font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; text-transform:uppercase; border-bottom:1px solid rgba(255,255,255,0.42); transition:border-color .22s ease, opacity .22s ease;" style-hover="border-color:#FFFFFF; opacity:0.78;">
+              <span data-case-label="">Read the case detail</span>
+              <span data-case-icon="" aria-hidden="true" style="font-size:0.9rem; line-height:1;">↓</span>
+            </button>
+          </div>
+          <div data-case-stat="" style="flex:0 0 auto; text-align:right;">
+            <p style="font-family:'Newsreader',serif; font-weight:500; font-size:clamp(1.9rem,4.4vw,3rem); line-height:0.95; letter-spacing:-0.03em; color:#FFFFFF;">Since May 2025</p>
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.72); margin-top:0.5rem; max-width:210px; line-height:1.6;">ordering, stock and spend, run by one person</p>
+          </div>
+        </div>
+      </div>
+      <div data-case-body="" style="display:none; max-width:1240px; margin:0 auto; padding:clamp(2rem,4vw,3rem) clamp(1.5rem,5vw,3rem) clamp(3rem,6vw,4.5rem);">
+        <div data-split="" style="display:grid; grid-template-columns:minmax(0,0.62fr) minmax(0,1.38fr); gap:clamp(1.6rem,5vw,3.4rem);">
+          <div>
+            <div style="display:flex; flex-wrap:wrap; gap:7px;">
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">Campaign</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">Budget &amp; procurement</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.08em; border:1px solid #DCE0E6; padding:6px 10px; color:#5C6470;">Cross-team coordination</span>
+            </div>
+            <div style="margin-top:clamp(1.4rem,3vw,2rem); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr)); gap:10px;">
+              <img src="uploads/6c4cc0c1-085d-4638-9ed5-ef5a61f28590.jpg" alt="Printed Free Period Products posters on a desk, ready to be put up" style="width:100%; height:100%; object-fit:cover; display:block; border:1px solid #DCE0E6;">
+              <img src="uploads/0a03c54a-e4ca-4f19-ab07-0e05811fc7ab.jpg" alt="A stocked period products station box held up in front of the iCentre sign" style="width:100%; height:100%; object-fit:cover; display:block; border:1px solid #DCE0E6;">
+            </div>
+            <p style="font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.08em; color:#5C6470; margin-top:8px;">Promotional posters and the station at the iCentre desk</p>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:1.3rem;">
+            <p style="font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.62;">I made the case for free period products on campus and have run the station since May 2025: ordering, stock and spend, coordinated across departments. I designed the promotional posters to the university's brand guidelines, and I keep the scheme on the agenda at cross-department meetings.</p>
+            <p style="font-family:'Hanken Grotesk',sans-serif; font-size:0.94rem; line-height:1.6; color:var(--accent,#1F4E79); border-top:1px solid #DCE0E6; padding-top:1rem;"><strong style="font-weight:600;">Transfers as:</strong> a small service stood up from business case to daily running by one person.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <section data-screen-label="Footer" style="background:#161A20; color:#F6F8FB; padding:clamp(3rem,7vw,5rem) 0 clamp(2.2rem,5vw,3rem);">
+      <div style="max-width:1240px; margin:0 auto; padding:0 clamp(1.5rem,5vw,3rem);">
+        <h2 style="font-family:'Newsreader',serif; font-weight:400; font-size:clamp(1.7rem,3.8vw,2.6rem); line-height:1.08; letter-spacing:-0.022em; max-width:24ch; text-wrap:balance; color:#FFFFFF;">Want to fix how something runs, or build the tool that fixes it? <em style="font-style:normal; color:#AECBEE;">Get in touch.</em></h2>
+        <div style="margin-top:1.4rem; display:flex; flex-direction:column; gap:12px; align-items:flex-start;">
+          <a href="mailto:rj1353954304@163.com" style="display:inline-flex; align-items:center; gap:13px; min-height:44px; padding:0 18px 0 0; font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:1rem; letter-spacing:0.01em; color:#AECBEE; text-decoration:none; transition:color .25s ease;" style-hover="color:#FFFFFF;">
+            <span aria-hidden="true" style="display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; flex:0 0 40px; border:1px solid rgba(255,255,255,0.28);">
+              <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14"></rect><path d="M2.5 6.5 12 13.5 21.5 6.5"></path></svg>
+            </span>Email
+          </a>
+          <a href="https://www.linkedin.com/in/ruojing-kou-744170297" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:13px; min-height:44px; padding:0 18px 0 0; font-family:'Hanken Grotesk',sans-serif; font-weight:600; font-size:1rem; letter-spacing:0.01em; color:#AECBEE; text-decoration:none; transition:color .25s ease;" style-hover="color:#FFFFFF;">
+            <span aria-hidden="true" style="display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; flex:0 0 40px; border:1px solid rgba(255,255,255,0.28); font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:0.94rem; letter-spacing:0.02em; color:currentColor;">in</span>LinkedIn
+          </a>
+        </div>
+        <p style="margin-top:clamp(2rem,4vw,2.8rem); padding-top:1.4rem; border-top:1px solid rgba(255,255,255,0.18); font-family:'Hanken Grotesk',sans-serif; font-size:0.84rem; color:rgba(246,248,251,0.56);"><a href="Portfolio (banded).dc.html" style="color:#AECBEE; text-decoration:none; border-bottom:1px dashed currentColor;">← Back to portfolio</a> · © 2026 Ruojing Kou</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;accentColor&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#1F4E79&quot;, &quot;options&quot;: [&quot;#1F4E79&quot;, &quot;#8C1D2E&quot;, &quot;#1B4332&quot;, &quot;#161A20&quot;], &quot;tsType&quot;: &quot;string&quot; }
+}">
+class Component extends DCLogic {
+  componentDidMount() {
+    this._onCaseClick = (ev) => {
+      if (!ev.target.closest) return;
+      if (ev.target.closest('a')) return;
+      const hit = ev.target.closest('[data-case-toggle]') || ev.target.closest('[data-case-header]');
+      if (!hit) return;
+      const article = hit.closest('article[id^="work-"]');
+      if (article) this.setCase(article, !this.isOpen(article));
+    };
+    document.addEventListener('click', this._onCaseClick);
+    this.openFromHash();
+    this.jumpToHash();
+    window.addEventListener('hashchange', this.onHash);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this._onCaseClick);
+    window.removeEventListener('hashchange', this.onHash);
+  }
+
+  isOpen(article) {
+    const body = article.querySelector('[data-case-body]');
+    return !!body && body.style.display !== 'none';
+  }
+
+  setCase(article, open) {
+    const body = article.querySelector('[data-case-body]');
+    const btn = article.querySelector('[data-case-toggle]');
+    if (!body || !btn) return;
+    body.style.display = open ? 'block' : 'none';
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    const label = btn.querySelector('[data-case-label]');
+    const icon = btn.querySelector('[data-case-icon]');
+    if (label) label.textContent = open ? 'Hide the case detail' : 'Read the case detail';
+    if (icon) icon.textContent = open ? '↑' : '↓';
+  }
+
+  openFromHash = () => {
+    const id = (window.location.hash || '').replace('#', '');
+    if (!id) return;
+    const article = document.getElementById(id);
+    if (article && article.matches('article[id^="work-"]')) this.setCase(article, true);
+  };
+
+  onHash = () => {
+    this.openFromHash();
+    this.jumpToHash();
+  };
+
+  jumpToHash = () => {
+    const id = (window.location.hash || '').replace('#', '');
+    if (!id) return;
+    let tries = 0;
+    const go = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.pageYOffset - 58;
+        window.scrollTo({ top, behavior: 'auto' });
+        return;
+      }
+      if (tries++ < 30) requestAnimationFrame(go);
+    };
+    requestAnimationFrame(go);
+    setTimeout(go, 400);
+  };
+
+  applyFilter(raw) {
+    const term = (raw || '').trim();
+    const query = term.toLowerCase();
+    const articles = document.querySelectorAll('article[id^="work-"]');
+    let shown = 0;
+    articles.forEach((article) => {
+      const hit = !query || article.textContent.toLowerCase().includes(query);
+      article.style.display = hit ? '' : 'none';
+      const chip = document.querySelector('a[href="#' + article.id + '"]');
+      if (chip) chip.style.display = hit ? '' : 'none';
+      if (hit) shown += 1;
+    });
+    const count = document.querySelector('[data-search-count]');
+    if (!count) return;
+    if (!query) {
+      count.textContent = '';
+    } else if (shown === 0) {
+      count.textContent = 'Nothing matches “' + term + '”';
+    } else {
+      count.textContent = shown + (shown === 1 ? ' project matches “' : ' projects match “') + term + '”';
+    }
+    count.style.marginTop = count.textContent ? '0.8rem' : '0';
+  }
+
+  renderVals() {
+    return {
+      accentColor: this.props.accentColor ?? '#1F4E79',
+      onSearch: (e) => this.applyFilter(e.target.value),
+    };
+  }
+}
+</script>
+</body>
+</html>
